@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-container" class="container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="container" style="display:none;">
+        <h1>Admin Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+
+        <!-- Stats Section -->
+        <h3>Attendance Overview</h3>
+        <div id="stats"></div>
+
+        <!-- Add Student Form -->
+        <form id="add-student-form">
+            <input type="text" id="new-student-name" placeholder="Student Name" required>
+            <input type="text" id="new-student-username" placeholder="Username" required>
+            <input type="password" id="new-student-password" placeholder="Password" required>
+            <button type="submit">Add Student</button>
+        </form>
+
+        <!-- Attendance Management -->
+        <div id="attendance-management">
+            <form id="attendance-form">
+                <select id="select-student"></select>
+                <input type="date" id="attendance-date" required>
+                <select id="attendance-status">
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
+                    <option value="College Work">College Work</option>
+                </select>
+                <button type="submit">Add Attendance</button>
+            </form>
+        </div>
+
+        <button onclick="downloadExcel()">Download Attendance</button>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="student-dashboard" class="container" style="display:none;">
+        <h1>Student Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+        <h3>Welcome, <span id="student-name"></span></h3>
+
+        <!-- Attendance Table -->
+        <table id="student-attendance-table">
+            <thead>
+                <tr><th>Date</th><th>Status</th></tr>
+            </thead>
+            <tbody id="student-attendance-body"></tbody>
+        </table>
+        <p>Attendance Percentage: <span id="attendance-percentage"></span></p>
+
+        <button onclick="downloadExcel(true, currentStudent.username)">Download My Attendance</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
